@@ -1,6 +1,13 @@
 import Link from 'next/link';
 
-const tools = [
+type Tool = {
+  title: string;
+  description: string;
+  href: string;
+  external?: boolean;
+};
+
+const tools: Tool[] = [
   {
     title: 'Sample Size Calculator',
     description:
@@ -26,11 +33,10 @@ const tools = [
     href: '/stat-test'
   },
   {
-    title: 'Bonferroni correction',
+    title: 'Bonferroni Correction',
     description:
       'Adjust alpha for multiple comparisons and avoid false positive spikes.',
-    href: 'https://abtest-calc.streamlit.app/?tool=bonferroni',
-    external: true
+    href: '/bonferroni'
   }
 ];
 

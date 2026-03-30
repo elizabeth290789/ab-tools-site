@@ -1,33 +1,36 @@
+import Link from 'next/link';
+
 const tools = [
   {
     title: 'Sample Size Calculator',
     description:
       'Estimate how many users you need before launching an experiment.',
-    href: 'https://abtest-calc.streamlit.app/?tool=sample-size'
+    href: '/sample-size'
   },
   {
     title: 'MDE Calculator',
     description:
       'Define the smallest uplift worth detecting and plan test sensitivity.',
-    href: 'https://abtest-calc.streamlit.app/?tool=mde'
+    href: '/mde'
   },
   {
     title: 'SRM Check',
     description:
       'Detect sample ratio mismatch quickly before trusting experiment results.',
-    href: 'https://abtest-calc.streamlit.app/?tool=srm-check'
+    href: '/srm'
   },
   {
     title: 'Statistical Significance Test',
     description:
       'Validate if treatment effects are likely real and not random noise.',
-    href: 'https://abtest-calc.streamlit.app/?tool=significance-test'
+    href: '/stat-test'
   },
   {
     title: 'Bonferroni correction',
     description:
       'Adjust alpha for multiple comparisons and avoid false positive spikes.',
-    href: 'https://abtest-calc.streamlit.app/?tool=bonferroni'
+    href: 'https://abtest-calc.streamlit.app/?tool=bonferroni',
+    external: true
   }
 ];
 
@@ -66,15 +69,15 @@ export default function Home() {
                   </p>
                 </div>
 
-                <a
+                <Link
                   href={tool.href}
-                  target="_blank"
-                  rel="noreferrer noopener"
+                  target={tool.external ? '_blank' : undefined}
+                  rel={tool.external ? 'noreferrer noopener' : undefined}
                   className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-ink px-4 py-2 text-sm font-medium transition-colors group-hover:bg-ink group-hover:text-white"
                 >
                   Open tool
-                  <span aria-hidden>↗</span>
-                </a>
+                  <span aria-hidden>{tool.external ? '↗' : '→'}</span>
+                </Link>
               </article>
             ))}
           </div>

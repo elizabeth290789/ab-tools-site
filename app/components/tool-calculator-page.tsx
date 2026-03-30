@@ -14,12 +14,14 @@ type ToolCalculatorPageProps = {
   title: string;
   description: string;
   fields: CalculatorField[];
+  workingCalculatorUrl: string;
 };
 
 export default function ToolCalculatorPage({
   title,
   description,
-  fields
+  fields,
+  workingCalculatorUrl
 }: ToolCalculatorPageProps) {
   const [values, setValues] = useState<Record<string, string>>(
     Object.fromEntries(fields.map((field) => [field.id, field.defaultValue]))
@@ -47,6 +49,22 @@ export default function ToolCalculatorPage({
         </header>
 
         <section className="mt-8 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
+          <p className="text-xs uppercase tracking-[0.18em] text-muted">Current status</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted md:text-base">
+            This page keeps the current layout for quick preview, while the full working version currently lives
+            in Streamlit.
+          </p>
+          <Link
+            href={workingCalculatorUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          >
+            Open working calculator <span aria-hidden>↗</span>
+          </Link>
+        </section>
+
+        <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
           <form onSubmit={onCalculate} className="space-y-5">
             <div className="grid gap-4 md:grid-cols-2">
               {fields.map((field) => (

@@ -4,6 +4,7 @@ export default function SampleSizePage() {
   return (
     <ToolCalculatorPage
       title="Sample Size Calculator"
+      workingCalculatorUrl="https://ab-test-toolkit.streamlit.app/Sample_Size_Calculator"
       description="Estimate the number of users needed per variant before running your A/B test."
       fields={[
         { id: 'baseline-rate', label: 'Baseline conversion rate (%)', placeholder: '10', defaultValue: '10' },

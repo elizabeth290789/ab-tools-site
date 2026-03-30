@@ -4,6 +4,7 @@ export default function SrmPage() {
   return (
     <ToolCalculatorPage
       title="SRM Check"
+      workingCalculatorUrl="https://ab-test-toolkit.streamlit.app/SRM_Check"
       description="Quickly detect sample ratio mismatch by comparing expected split with observed variant counts."
       fields={[
         { id: 'expected-control', label: 'Expected control share (%)', placeholder: '50', defaultValue: '50' },

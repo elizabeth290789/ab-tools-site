@@ -4,6 +4,7 @@ export default function StatTestPage() {
   return (
     <ToolCalculatorPage
       title="Statistical Significance Test"
+      workingCalculatorUrl="https://ab-test-toolkit.streamlit.app/Statistical_Significance_Test"
       description="Compare control vs variant performance and review a simple significance output block."
       fields={[
         { id: 'control-conv', label: 'Control conversions', placeholder: '540', defaultValue: '540' },

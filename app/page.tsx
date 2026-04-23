@@ -43,6 +43,11 @@ const tools: Tool[] = [
     description:
       'Compare conversion rates between A, B, and C with Bonferroni correction.',
     href: '/stat-test-abc'
+  },
+  {
+    title: 'ARPU Statistical Test',
+    description: 'Compare ARPU between control and test with Welch t-test.',
+    href: '/stat-test-arpu'
   }
 ];
 

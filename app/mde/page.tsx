@@ -265,7 +265,7 @@ export default function MdePage() {
                 <p className="mt-2 text-lg font-medium">{formatPercent(result.baselineRate)}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">База для теста в месяц</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">База для теста</p>
                 <p className="mt-2 text-lg font-medium">{result.totalBase.toLocaleString('ru-RU')}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">

@@ -21,6 +21,7 @@ type SrmResult = {
 const SHARE_SUM_TOLERANCE = 1e-6;
 const GAMMA_EPSILON = 3e-7;
 const GSL_MAX_ITERATIONS = 100;
+const EXPECTED_SHARE_DECIMALS = 6;
 
 function logGamma(value: number): number {
   const coefficients = [
@@ -163,6 +164,24 @@ function formatNumber(value: number, digits = 4) {
   }).format(value);
 }
 
+function getEvenExpectedShares(groupCount: number): string[] {
+  if (groupCount <= 0) {
+    return [];
+  }
+
+  const baseShare = Number((1 / groupCount).toFixed(EXPECTED_SHARE_DECIMALS));
+  let accumulated = 0;
+
+  return Array.from({ length: groupCount }, (_, index) => {
+    if (index === groupCount - 1) {
+      return (1 - accumulated).toFixed(EXPECTED_SHARE_DECIMALS);
+    }
+
+    accumulated += baseShare;
+    return baseShare.toFixed(EXPECTED_SHARE_DECIMALS);
+  });
+}
+
 export default function SrmPage() {
   const [groups, setGroups] = useState<GroupInput[]>([
     { id: 1, observed: '1000', expectedShare: '0.5' },
@@ -170,11 +189,6 @@ export default function SrmPage() {
   ]);
   const [alpha, setAlpha] = useState('0.05');
   const [hasCalculated, setHasCalculated] = useState(false);
-
-  const nextGroupId = useMemo(
-    () => (groups.length > 0 ? Math.max(...groups.map((group) => group.id)) + 1 : 1),
-    [groups]
-  );
 
   const parsedData = useMemo(() => {
     const observed = groups.map((group) => Number(group.observed));
@@ -219,7 +233,16 @@ export default function SrmPage() {
   }, [hasCalculated, parsedData]);
 
   const addGroup = () => {
-    setGroups((previous) => [...previous, { id: nextGroupId, observed: '0', expectedShare: '0.1' }]);
+    setGroups((previous) => {
+      const nextId = previous.length > 0 ? Math.max(...previous.map((group) => group.id)) + 1 : 1;
+      const nextGroups = [...previous, { id: nextId, observed: '0', expectedShare: '0' }];
+      const evenShares = getEvenExpectedShares(nextGroups.length);
+
+      return nextGroups.map((group, index) => ({
+        ...group,
+        expectedShare: evenShares[index]
+      }));
+    });
   };
 
   const removeGroup = (id: number) => {
@@ -227,7 +250,14 @@ export default function SrmPage() {
       if (previous.length <= 2) {
         return previous;
       }
-      return previous.filter((group) => group.id !== id);
+
+      const nextGroups = previous.filter((group) => group.id !== id);
+      const evenShares = getEvenExpectedShares(nextGroups.length);
+
+      return nextGroups.map((group, index) => ({
+        ...group,
+        expectedShare: evenShares[index]
+      }));
     });
   };
 

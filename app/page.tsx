@@ -37,6 +37,12 @@ const tools: Tool[] = [
     description:
       'Adjust alpha for multiple comparisons and avoid false positive spikes.',
     href: '/bonferroni'
+  },
+  {
+    title: 'A/B/C Statistical Test',
+    description:
+      'Compare conversion rates between A, B, and C with Bonferroni correction.',
+    href: '/stat-test-abc'
   }
 ];
 

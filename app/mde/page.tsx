@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 
-type ExperimentType = 'landing' | 'checkout' | 'subscription';
+type ExperimentType = 'landing' | 'presets' | 'purchase';
 type HypothesisType = 'two-sided' | 'one-sided';
 
 type ResultState = {
@@ -30,18 +30,18 @@ const experimentTypeOptions: Array<{
     currentMetricLabel: 'Текущая конверсия в регистрацию'
   },
   {
-    value: 'checkout',
-    label: 'Чекаут / покупка',
+    value: 'presets',
+    label: 'Пресеты / посадка в продукт',
+    usersLabel: 'Пользователи в месяц',
+    conversionsLabel: 'Посадки в продукт в месяц',
+    currentMetricLabel: 'Текущая конверсия в посадку в продукт'
+  },
+  {
+    value: 'purchase',
+    label: 'Покупки',
     usersLabel: 'Пользователи в месяц',
     conversionsLabel: 'Покупки в месяц',
     currentMetricLabel: 'Текущая конверсия в покупку'
-  },
-  {
-    value: 'subscription',
-    label: 'Подписка / активация',
-    usersLabel: 'Пользователи в месяц',
-    conversionsLabel: 'Активации в месяц',
-    currentMetricLabel: 'Текущая конверсия в активацию'
   }
 ];
 
@@ -266,7 +266,7 @@ export default function MdePage() {
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted">База для теста в месяц</p>
-                <p className="mt-2 text-lg font-medium">{Number(usersPerMonth).toLocaleString('ru-RU')} / {result.totalBase.toLocaleString('ru-RU')}</p>
+                <p className="mt-2 text-lg font-medium">{result.totalBase.toLocaleString('ru-RU')}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted">Наблюдений на группу</p>

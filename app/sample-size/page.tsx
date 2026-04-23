@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
 type Alternative = 'two-sided' | 'one-sided';
+type ExperimentType = 'landing' | 'presets' | 'purchase';
 
 const zTable: Record<string, number> = {
   '0.8': 0.8416212335729143,
@@ -111,7 +112,7 @@ function formatPercent(value: number): string {
 }
 
 export default function SampleSizePage() {
-  const [experimentType, setExperimentType] = useState('A/B test (2 groups)');
+  const [experimentType, setExperimentType] = useState<ExperimentType>('landing');
   const [baselineRate, setBaselineRate] = useState('7');
   const [usersPerDay, setUsersPerDay] = useState('1000');
   const [mde, setMde] = useState('0.5');
@@ -120,6 +121,21 @@ export default function SampleSizePage() {
   const [alternative, setAlternative] = useState<Alternative>('two-sided');
   const [trafficShare, setTrafficShare] = useState('1');
   const [hasCalculated, setHasCalculated] = useState(false);
+
+  const labels: Record<ExperimentType, { conversion: string; users: string }> = {
+    landing: {
+      conversion: 'Базовая конверсия в регистрацию (%)',
+      users: 'Среднее число пользователей в день'
+    },
+    presets: {
+      conversion: 'Базовый retention ret3+ (%)',
+      users: 'Среднее число регистраций в день'
+    },
+    purchase: {
+      conversion: 'Базовая конверсия в покупку (%)',
+      users: 'Среднее число регистраций в день'
+    }
+  };
 
   const result = useMemo(() => {
     const baselineRateValue = Number.parseFloat(baselineRate);
@@ -177,18 +193,20 @@ export default function SampleSizePage() {
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
           <div className="grid gap-4 md:grid-cols-2">
             <label className="flex flex-col gap-2 text-sm font-medium">
-              <span>Experiment type</span>
+              <span>Тип эксперимента</span>
               <select
                 value={experimentType}
-                onChange={(event) => setExperimentType(event.target.value)}
+                onChange={(event) => setExperimentType(event.target.value as ExperimentType)}
                 className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
               >
-                <option>A/B test (2 groups)</option>
+                <option value="landing">Лендинг / регистрация</option>
+                <option value="presets">Пресеты / посадка в продукт</option>
+                <option value="purchase">Покупки</option>
               </select>
             </label>
 
             <label className="flex flex-col gap-2 text-sm font-medium">
-              <span>Baseline conversion to signup (%)</span>
+              <span>{labels[experimentType].conversion}</span>
               <input
                 value={baselineRate}
                 onChange={(event) => setBaselineRate(event.target.value)}
@@ -197,7 +215,7 @@ export default function SampleSizePage() {
             </label>
 
             <label className="flex flex-col gap-2 text-sm font-medium">
-              <span>Average users per day</span>
+              <span>{labels[experimentType].users}</span>
               <input
                 value={usersPerDay}
                 onChange={(event) => setUsersPerDay(event.target.value)}

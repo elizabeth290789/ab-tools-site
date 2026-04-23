@@ -9,6 +9,14 @@ type CalculatorField = {
   label: string;
   placeholder: string;
   defaultValue: string;
+  type?: 'text' | 'number' | 'select';
+  options?: Array<{ label: string; value: string }>;
+};
+
+type CalculatedResult = {
+  id: string;
+  label: string;
+  value: string;
 };
 
 type ToolCalculatorPageProps = {
@@ -16,13 +24,15 @@ type ToolCalculatorPageProps = {
   description: string;
   fields: CalculatorField[];
   workingCalculatorUrl: string;
+  calculateResults?: (values: Record<string, string>) => CalculatedResult[];
 };
 
 export default function ToolCalculatorPage({
   title,
   description,
   fields,
-  workingCalculatorUrl
+  workingCalculatorUrl,
+  calculateResults
 }: ToolCalculatorPageProps) {
   const pathname = usePathname();
   const streamlitUrlMapping: Record<string, string> = {
@@ -39,6 +49,7 @@ export default function ToolCalculatorPage({
     Object.fromEntries(fields.map((field) => [field.id, field.defaultValue]))
   );
   const [hasCalculated, setHasCalculated] = useState(false);
+  const calculatedResults = calculateResults?.(values) ?? [];
 
   const onCalculate = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -82,17 +93,37 @@ export default function ToolCalculatorPage({
               {fields.map((field) => (
                 <label key={field.id} className="flex flex-col gap-2 text-sm font-medium">
                   <span>{field.label}</span>
-                  <input
-                    value={values[field.id]}
-                    onChange={(event) =>
-                      setValues((prev) => ({
-                        ...prev,
-                        [field.id]: event.target.value
-                      }))
-                    }
-                    placeholder={field.placeholder}
-                    className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
-                  />
+                  {field.type === 'select' ? (
+                    <select
+                      value={values[field.id]}
+                      onChange={(event) =>
+                        setValues((prev) => ({
+                          ...prev,
+                          [field.id]: event.target.value
+                        }))
+                      }
+                      className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
+                    >
+                      {(field.options ?? []).map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type={field.type ?? 'text'}
+                      value={values[field.id]}
+                      onChange={(event) =>
+                        setValues((prev) => ({
+                          ...prev,
+                          [field.id]: event.target.value
+                        }))
+                      }
+                      placeholder={field.placeholder}
+                      className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
+                    />
+                  )}
                 </label>
               ))}
             </div>
@@ -114,6 +145,12 @@ export default function ToolCalculatorPage({
                 <div key={field.id} className="rounded-xl border border-border bg-canvas px-4 py-3">
                   <p className="text-xs uppercase tracking-[0.18em] text-muted">{field.label}</p>
                   <p className="mt-2 text-lg font-medium">{values[field.id] || '—'}</p>
+                </div>
+              ))}
+              {calculatedResults.map((result) => (
+                <div key={result.id} className="rounded-xl border border-border bg-canvas px-4 py-3">
+                  <p className="text-xs uppercase tracking-[0.18em] text-muted">{result.label}</p>
+                  <p className="mt-2 text-lg font-medium">{result.value || '—'}</p>
                 </div>
               ))}
             </div>

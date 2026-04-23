@@ -33,6 +33,12 @@ const tools: Tool[] = [
     href: '/stat-test'
   },
   {
+    title: 'ARPU Statistical Test',
+    description:
+      'Run Welch t-test for ARPU using summary statistics from both groups.',
+    href: '/stat-test-arpu'
+  },
+  {
     title: 'Bonferroni Correction',
     description:
       'Adjust alpha for multiple comparisons and avoid false positive spikes.',

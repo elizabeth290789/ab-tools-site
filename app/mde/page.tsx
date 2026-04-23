@@ -165,21 +165,6 @@ export default function MdePage() {
         </header>
 
         <section className="mt-8 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <p className="text-xs uppercase tracking-[0.18em] text-muted">Current status</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted md:text-base">
-            Страница использует текущий layout для быстрого превью. Рабочая Streamlit-версия доступна по ссылке ниже.
-          </p>
-          <Link
-            href="https://abtest-calc.streamlit.app/mde"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
-          >
-            Open working calculator <span aria-hidden>↗</span>
-          </Link>
-        </section>
-
-        <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
           <form onSubmit={onCalculate} className="space-y-5">
             <div className="grid gap-4 md:grid-cols-2">
               <label className="flex flex-col gap-2 text-sm font-medium md:col-span-2">
@@ -280,7 +265,7 @@ export default function MdePage() {
                 <p className="mt-2 text-lg font-medium">{formatPercent(result.baselineRate)}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">База для теста в месяц / общая база теста</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">База для теста в месяц</p>
                 <p className="mt-2 text-lg font-medium">{Number(usersPerMonth).toLocaleString('ru-RU')} / {result.totalBase.toLocaleString('ru-RU')}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
@@ -297,7 +282,9 @@ export default function MdePage() {
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
                 <p className="text-xs uppercase tracking-[0.18em] text-muted">Детектируемый рост метрики</p>
-                <p className="mt-2 text-lg font-medium">{formatPercent(result.detectableMetricGrowth)}</p>
+                <p className="mt-2 text-lg font-medium">
+                  {formatPercent(result.baselineRate)} → {formatPercent(result.detectableMetricGrowth)}
+                </p>
               </div>
             </div>
           ) : (

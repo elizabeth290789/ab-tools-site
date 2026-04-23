@@ -32,6 +32,13 @@ const tools: Tool[] = [
       'Validate if treatment effects are likely real and not random noise.',
     href: '/stat-test'
   },
+
+  {
+    title: 'Stat Test ARPU',
+    description:
+      'Compare ARPU means with Welch t-test from summary statistics.',
+    href: '/stat-test-arpu'
+  },
   {
     title: 'Bonferroni Correction',
     description:

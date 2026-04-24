@@ -290,27 +290,27 @@ export default function SampleSizePage() {
           ) : (
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Conversion control</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">Конверсия control</p>
                 <p className="mt-2 text-lg font-medium">{formatPercent(result.p1 * 100)}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Conversion treatment</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">Конверсия test</p>
                 <p className="mt-2 text-lg font-medium">{formatPercent(result.p2 * 100)}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Relative uplift (%)</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">Относительный рост (%)</p>
                 <p className="mt-2 text-lg font-medium">{formatPercent(result.relativeUplift)}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Sample size per group</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">Размер выборки на группу</p>
                 <p className="mt-2 text-lg font-medium">{formatInt(result.sampleSizePerGroup)}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Total sample size</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">Общий размер выборки</p>
                 <p className="mt-2 text-lg font-medium">{formatInt(result.totalSampleSize)}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Estimated test duration (days)</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">Оценочная длительность теста (дни)</p>
                 <p className="mt-2 text-lg font-medium">{formatInt(result.estimatedDurationDays)}</p>
               </div>
             </div>

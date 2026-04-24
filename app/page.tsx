@@ -58,13 +58,16 @@ export default function Home() {
       <div className="mx-auto w-full max-w-6xl px-6 py-14 md:px-10 md:py-20">
         <section className="border-y border-border py-10 md:py-16">
           <p className="text-xs uppercase tracking-[0.24em] text-muted">
-            A/B testing platform
+            A/B TEST TOOLKIT
           </p>
           <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">
             A/B Test Toolkit
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-muted md:text-xl">
-            Tools for running better experiments
+            Набор инструментов для A/B-тестирования
+          </p>
+          <p className="mt-3 max-w-2xl text-sm text-muted/80 md:text-base">
+            Считайте. Проверяйте. Запускайте.
           </p>
         </section>
 

@@ -9,45 +9,45 @@ type Tool = {
 
 const tools: Tool[] = [
   {
-    title: 'Sample Size Calculator',
+    title: 'Калькулятор размера выборки',
     description:
-      'Estimate how many users you need before launching an experiment.',
+      'Рассчитайте, сколько пользователей нужно, чтобы провести A/B тест.',
     href: '/sample-size'
   },
   {
-    title: 'MDE Calculator',
+    title: 'Калькулятор MDE',
     description:
-      'Define the smallest uplift worth detecting and plan test sensitivity.',
+      'Определите минимальный статистический эффект, который возможно поймать.',
     href: '/mde'
   },
   {
-    title: 'SRM Check',
+    title: 'Проверка SRM',
     description:
-      'Detect sample ratio mismatch quickly before trusting experiment results.',
+      'Проверьте результат A/B теста на соответствие выборочных соотношений.',
     href: '/srm'
   },
   {
-    title: 'Statistical Significance Test',
+    title: 'Проверка статистической значимости',
     description:
-      'Validate if treatment effects are likely real and not random noise.',
+      'Поймите, действительно ли есть эффект — или это просто шум. Используется Z-тест для конверсии.',
     href: '/stat-test'
   },
   {
-    title: 'Bonferroni Correction',
+    title: 'Размер выборки для A/B/C теста',
     description:
-      'Adjust alpha for multiple comparisons and avoid false positive spikes.',
+      'Рассчитайте, сколько пользователей нужно, чтобы провести A/B/C тест.',
     href: '/bonferroni'
   },
   {
-    title: 'A/B/C Statistical Test',
+    title: 'Проверка A/B/C теста (с поправкой Бонферрони)',
     description:
-      'Compare conversion rates between A, B, and C with Bonferroni correction.',
+      'Сравнивайте конверсии между вариантами A, B и C с учётом множественных проверок.',
     href: '/stat-test-abc'
   },
   // TOOL 07
   {
-    title: 'ARPU Statistical Test',
-    description: 'Compare ARPU between control and test with Welch t-test.',
+    title: 'Статтест для ARPU',
+    description: 'Сравнивайте ARPU между группами с помощью t-теста Уэлча.',
     href: '/stat-test-arpu'
   }
 ];
@@ -93,7 +93,7 @@ export default function Home() {
                   rel={tool.external ? 'noreferrer noopener' : undefined}
                   className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-ink px-4 py-2 text-sm font-medium transition-colors group-hover:bg-ink group-hover:text-white"
                 >
-                  Open tool
+                  Открыть
                   <span aria-hidden>{tool.external ? '↗' : '→'}</span>
                 </Link>
               </article>

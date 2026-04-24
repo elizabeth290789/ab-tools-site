@@ -233,7 +233,7 @@ export default function SampleSizePage() {
             </label>
 
             <label className="flex flex-col gap-2 text-sm font-medium">
-              <span>Alpha</span>
+              <span>alpha</span>
               <input
                 value={alpha}
                 onChange={(event) => setAlpha(event.target.value)}
@@ -242,7 +242,7 @@ export default function SampleSizePage() {
             </label>
 
             <label className="flex flex-col gap-2 text-sm font-medium">
-              <span>Power</span>
+              <span>power</span>
               <input
                 value={power}
                 onChange={(event) => setPower(event.target.value)}
@@ -251,7 +251,7 @@ export default function SampleSizePage() {
             </label>
 
             <label className="flex flex-col gap-2 text-sm font-medium">
-              <span>Hypothesis test type</span>
+              <span>Тип проверки гипотезы</span>
               <select
                 value={alternative}
                 onChange={(event) => setAlternative(event.target.value as Alternative)}
@@ -263,7 +263,7 @@ export default function SampleSizePage() {
             </label>
 
             <label className="flex flex-col gap-2 text-sm font-medium">
-              <span>Traffic share in experiment</span>
+              <span>Доля трафика в эксперименте</span>
               <input
                 value={trafficShare}
                 onChange={(event) => setTrafficShare(event.target.value)}

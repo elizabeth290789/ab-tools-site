@@ -105,6 +105,14 @@ export default function StatTestPage() {
   const [testConversions, setTestConversions] = useState('1650');
   const [alpha, setAlpha] = useState('0.05');
   const [hypothesisType, setHypothesisType] = useState<HypothesisType>('two-sided');
+  const [calculatedValues, setCalculatedValues] = useState<{
+    controlUsers: string;
+    controlConversions: string;
+    testUsers: string;
+    testConversions: string;
+    alpha: string;
+    hypothesisType: HypothesisType;
+  } | null>(null);
 
   const selectedType = useMemo(
     () => experimentTypeOptions.find((option) => option.value === experimentType) ?? experimentTypeOptions[0],
@@ -112,11 +120,15 @@ export default function StatTestPage() {
   );
 
   const result = useMemo(() => {
-    const n1 = Number(controlUsers);
-    const x1 = Number(controlConversions);
-    const n2 = Number(testUsers);
-    const x2 = Number(testConversions);
-    const alphaValue = Number(alpha);
+    if (!calculatedValues) {
+      return null;
+    }
+
+    const n1 = Number(calculatedValues.controlUsers);
+    const x1 = Number(calculatedValues.controlConversions);
+    const n2 = Number(calculatedValues.testUsers);
+    const x2 = Number(calculatedValues.testConversions);
+    const alphaValue = Number(calculatedValues.alpha);
 
     if (
       [n1, x1, n2, x2, alphaValue].some((item) => Number.isNaN(item)) ||
@@ -146,7 +158,7 @@ export default function StatTestPage() {
 
     const z = diff / sePooled;
     const pValue =
-      hypothesisType === 'two-sided'
+      calculatedValues.hypothesisType === 'two-sided'
         ? 2 * (1 - normalCdf(Math.abs(z)))
         : 1 - normalCdf(z);
 
@@ -166,7 +178,7 @@ export default function StatTestPage() {
       ciHigh,
       isSignificant: pValue < alphaValue
     };
-  }, [alpha, controlConversions, controlUsers, hypothesisType, testConversions, testUsers]);
+  }, [calculatedValues]);
 
   return (
     <main className="min-h-screen bg-canvas text-ink">
@@ -269,11 +281,30 @@ export default function StatTestPage() {
               </select>
             </label>
           </div>
+
+          <button
+            type="button"
+            onClick={() =>
+              setCalculatedValues({
+                controlUsers,
+                controlConversions,
+                testUsers,
+                testConversions,
+                alpha,
+                hypothesisType
+              })
+            }
+            className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 md:w-auto"
+          >
+            Calculate
+          </button>
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
           <h2 className="text-lg font-semibold">Results</h2>
-          {result ? (
+          {!calculatedValues ? (
+            <p className="mt-3 text-sm text-muted">Заполните поля и нажмите Calculate.</p>
+          ) : result ? (
             <div className="mt-4 space-y-2 text-sm text-muted">
               <p>Конверсия control: <span className="font-semibold text-ink">{formatPercent(result.p1)}</span></p>
               <p>Конверсия test: <span className="font-semibold text-ink">{formatPercent(result.p2)}</span></p>

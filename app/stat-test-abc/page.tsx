@@ -198,12 +198,12 @@ export default function StatTestAbcPage() {
         <p>Конверсия {rightLabel}: <span className="font-semibold text-ink">{formatPercent(pairResult.p2)}</span></p>
         <p>Разница (в п.п.): <span className="font-semibold text-ink">{formatPp(pairResult.diff)}</span></p>
         <p>
-          Relative uplift (%):{' '}
+          Относительный рост (%):{' '}
           <span className="font-semibold text-ink">
             {pairResult.uplift === null ? 'N/A' : `${(pairResult.uplift * 100).toFixed(2)}%`}
           </span>
         </p>
-        <p>z-statistic: <span className="font-semibold text-ink">{pairResult.z.toFixed(3)}</span></p>
+        <p>Z-статистика: <span className="font-semibold text-ink">{pairResult.z.toFixed(3)}</span></p>
         <p>p-value: <span className="font-semibold text-ink">{pairResult.pValue.toFixed(6)}</span></p>
         <p>
           CI для разницы (п.п.):{' '}
@@ -222,7 +222,7 @@ export default function StatTestAbcPage() {
     <main className="min-h-screen bg-canvas text-ink">
       <div className="mx-auto w-full max-w-3xl px-6 py-12 md:px-10 md:py-16">
         <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
-          ← Back to toolkit
+          ← Назад к выбору инструментов
         </Link>
 
         <header className="mt-6 border-y border-border py-8">
@@ -296,7 +296,7 @@ export default function StatTestAbcPage() {
               onClick={handleCalculate}
               className="inline-flex items-center gap-2 rounded-full border border-ink px-5 py-2.5 text-sm font-medium transition-colors hover:bg-ink hover:text-white"
             >
-              Calculate
+              Рассчитать
             </button>
           </div>
         </section>

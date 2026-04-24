@@ -33,7 +33,7 @@ const experimentTypeOptions: Array<{
     value: 'presets',
     label: 'Пресеты / посадка в продукт',
     usersLabel: 'Пользователи в месяц',
-    conversionsLabel: 'Посадки в продукт в месяц',
+    conversionsLabel: 'Ret3+ в месяц',
     currentMetricLabel: 'Текущая конверсия'
   },
   {

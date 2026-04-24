@@ -202,9 +202,11 @@ export default function StatTestPage() {
               </select>
             </label>
 
-            <div className="rounded-xl border border-border p-4">
-              <h2 className="text-sm font-semibold">Control</h2>
-              <div className="mt-3 grid gap-3">
+            <div className="flex flex-col">
+              <span className="mb-2 inline-flex w-fit rounded-[10px] bg-[#f3f3f3] px-[10px] py-1 text-xs font-medium text-muted">
+                Control
+              </span>
+              <div className="rounded-xl border border-border p-4">
                 <label className="flex flex-col gap-2 text-sm font-medium">
                   <span>{selectedType.labels.usersLabel} в control</span>
                   <input
@@ -225,9 +227,11 @@ export default function StatTestPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-border p-4">
-              <h2 className="text-sm font-semibold">Test</h2>
-              <div className="mt-3 grid gap-3">
+            <div className="flex flex-col">
+              <span className="mb-2 inline-flex w-fit rounded-[10px] bg-[#f3f3f3] px-[10px] py-1 text-xs font-medium text-muted">
+                Test
+              </span>
+              <div className="rounded-xl border border-border p-4">
                 <label className="flex flex-col gap-2 text-sm font-medium">
                   <span>{selectedType.labels.usersLabel} в test</span>
                   <input

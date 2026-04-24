@@ -56,16 +56,13 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-canvas text-ink">
       <div className="mx-auto w-full max-w-6xl px-6 py-14 md:px-10 md:py-20">
-        <header className="mb-8 flex flex-wrap items-center justify-between gap-3 text-xs uppercase tracking-[0.24em] text-muted md:mb-10">
+        <header className="mb-4 flex flex-wrap items-center justify-between gap-3 text-xs uppercase tracking-[0.24em] text-muted md:mb-6">
           <p>A/B TEST TOOLKIT</p>
           <p>BY MIKHAYLOVA ELIZAVETA</p>
         </header>
 
-        <section className="border-y border-border py-10 md:py-16">
-          <p className="text-xs uppercase tracking-[0.24em] text-muted">
-            A/B TEST TOOLKIT
-          </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">
+        <section className="border-y border-border py-8 md:py-12">
+          <h1 className="max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">
             Набор инструментов для A/B-тестирования
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-muted md:text-xl">

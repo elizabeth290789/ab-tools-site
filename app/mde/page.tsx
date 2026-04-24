@@ -25,21 +25,21 @@ const experimentTypeOptions: Array<{
   {
     value: 'landing',
     label: 'Лендинг / регистрация',
-    usersLabel: 'Пользователи в месяц',
-    conversionsLabel: 'Регистрации в месяц',
+    usersLabel: 'Среднее число пользователей в месяц',
+    conversionsLabel: 'Среднее число регистраций в месяц',
     currentMetricLabel: 'Текущая конверсия'
   },
   {
     value: 'presets',
     label: 'Пресеты / посадка в продукт',
-    usersLabel: 'Пользователи в месяц',
+    usersLabel: 'Среднее число пользователей в месяц',
     conversionsLabel: 'Ret3+ в месяц',
     currentMetricLabel: 'Текущая конверсия'
   },
   {
     value: 'purchase',
     label: 'Покупки',
-    usersLabel: 'Пользователи в месяц',
+    usersLabel: 'Среднее число пользователей в месяц',
     conversionsLabel: 'Покупки в месяц',
     currentMetricLabel: 'Текущая конверсия'
   }

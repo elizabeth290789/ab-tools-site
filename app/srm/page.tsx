@@ -289,13 +289,13 @@ export default function SrmPage() {
           href="/"
           className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink"
         >
-          ← Back to toolkit
+          ← Назад к выбору инструментов
         </Link>
 
         <header className="mt-6 border-y border-border py-8">
-          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">SRM Check</h1>
+          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Проверка SRM</h1>
           <p className="mt-3 max-w-2xl text-base text-muted md:text-lg">
-            Проверьте соответствие фактического распределения трафика ожидаемому сплиту с помощью chi-square SRM-теста.
+            Проверьте соответствие фактического распределения трафика ожидаемому сплиту с помощью χ²-теста (SRM).
           </p>
         </header>
 
@@ -362,16 +362,16 @@ export default function SrmPage() {
               type="submit"
               className="inline-flex w-full items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 md:w-auto"
             >
-              Calculate
+              Рассчитать
             </button>
           </form>
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Results</h2>
+          <h2 className="text-lg font-semibold">Результаты</h2>
 
           {!hasCalculated ? (
-            <p className="mt-3 text-sm text-muted">Заполните поля и нажмите Calculate, чтобы увидеть результат SRM-проверки.</p>
+            <p className="mt-3 text-sm text-muted">Заполните поля и нажмите «Рассчитать», чтобы увидеть результат SRM-проверки.</p>
           ) : null}
 
           {hasCalculated && calculation.error ? (

@@ -179,14 +179,14 @@ export default function SampleSizePage() {
           href="/"
           className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink"
         >
-          ← Back to toolkit
+          ← Назад к выбору инструментов
         </Link>
 
         <header className="mt-6 border-y border-border py-8">
-          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Sample Size Calculator</h1>
+          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Калькулятор размера выборки</h1>
           <p className="mt-3 max-w-2xl text-base text-muted md:text-lg">
-            Estimate the sample size for a two-group conversion A/B test using baseline conversion, MDE,
-            alpha, power, and available traffic.
+            Оцените размер выборки для A/B-тестирования в двух группах, используя базовый уровень конверсии,
+            MDE, уровень значимости, мощность и доступный трафик.
           </p>
         </header>
 
@@ -277,14 +277,14 @@ export default function SampleSizePage() {
             onClick={() => setHasCalculated(true)}
             className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 md:w-auto"
           >
-            Calculate
+            Рассчитать
           </button>
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Results</h2>
+          <h2 className="text-lg font-semibold">Результаты</h2>
           {!hasCalculated ? (
-            <p className="mt-3 text-sm text-muted">Fill the inputs and click Calculate.</p>
+            <p className="mt-3 text-sm text-muted">Заполните поля и нажмите «Рассчитать».</p>
           ) : !result ? (
             <p className="mt-3 text-sm text-red-600">Please enter valid input values.</p>
           ) : (

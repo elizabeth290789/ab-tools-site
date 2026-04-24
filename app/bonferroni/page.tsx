@@ -2,7 +2,6 @@
 
 import { FormEvent, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 type MdeType = 'pp' | 'relative';
 
@@ -81,17 +80,6 @@ function formatPercent(value: number): string {
 }
 
 export default function BonferroniPage() {
-  const pathname = usePathname();
-  const streamlitUrlMapping: Record<string, string> = {
-    '/sample-size': 'https://abtest-calc.streamlit.app/sample-size',
-    '/mde': 'https://abtest-calc.streamlit.app/mde',
-    '/srm': 'https://abtest-calc.streamlit.app/srm',
-    '/stat-test': 'https://abtest-calc.streamlit.app/stat-test',
-    '/bonferroni': 'https://abtest-calc.streamlit.app/bonferroni',
-    '/stat-test-arpu': 'https://abtest-calc.streamlit.app/stat-test-arpu'
-  };
-  const workingCalculatorLink = streamlitUrlMapping[pathname] ?? 'https://abtest-calc.streamlit.app/';
-
   const [baselineConversion, setBaselineConversion] = useState('7');
   const [mdeType, setMdeType] = useState<MdeType>('pp');
   const [mdeValue, setMdeValue] = useState('0.5');
@@ -168,7 +156,7 @@ export default function BonferroniPage() {
           href="/"
           className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink"
         >
-          ← Back to toolkit
+          ← Назад к выбору инструментов
         </Link>
 
         <header className="mt-6 border-y border-border py-8">
@@ -181,22 +169,6 @@ export default function BonferroniPage() {
             Глобальный уровень значимости делится на число сравнений (Bonferroni correction).
           </p>
         </header>
-
-        <section className="mt-8 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <p className="text-xs uppercase tracking-[0.18em] text-muted">Current status</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted md:text-base">
-            This page keeps the same product logic as the Streamlit version, while the full working mirror is also
-            available there.
-          </p>
-          <Link
-            href={workingCalculatorLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90"
-          >
-            Open working calculator <span aria-hidden>↗</span>
-          </Link>
-        </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
           <form onSubmit={onCalculate} className="space-y-5">
@@ -240,7 +212,7 @@ export default function BonferroniPage() {
               </label>
 
               <label className="flex flex-col gap-2 text-sm font-medium">
-                <span>alpha global</span>
+                <span>Глобальный уровень значимости (alpha)</span>
                 <input
                   type="number"
                   min="0"
@@ -253,7 +225,7 @@ export default function BonferroniPage() {
               </label>
 
               <label className="flex flex-col gap-2 text-sm font-medium">
-                <span>power</span>
+                <span>Мощность (power)</span>
                 <input
                   type="number"
                   min="0"
@@ -283,7 +255,7 @@ export default function BonferroniPage() {
               type="submit"
               className="inline-flex w-full items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 md:w-auto"
             >
-              Calculate
+              Рассчитать
             </button>
           </form>
         </section>
@@ -299,13 +271,13 @@ export default function BonferroniPage() {
                 <p><strong>Целевая конверсия:</strong> {formatPercent(result.targetConversion)}</p>
                 <p><strong>Скорректированный alpha:</strong> {result.correctedAlpha.toPrecision(6)}</p>
                 <p><strong>Размер выборки на группу:</strong> {formatInt(result.sampleSizePerGroup)}</p>
-                <p><strong>Размер выборки на одно сравнение (2 группы):</strong> {formatInt(result.sampleSizePerComparison)}</p>
+                <p><strong>Размер выборки на сравнение:</strong> {formatInt(result.sampleSizePerComparison)}</p>
                 <p><strong>Общий размер выборки для 3 групп:</strong> {formatInt(result.totalSampleSizeForThreeGroups)}</p>
               </div>
             )
           ) : (
             <p className="mt-3 text-sm text-muted">
-              Заполните поля и нажмите <strong>Calculate</strong>, чтобы получить расчёт.
+              Заполните поля и нажмите <strong>«Рассчитать»</strong>, чтобы получить расчёт.
             </p>
           )}
         </section>

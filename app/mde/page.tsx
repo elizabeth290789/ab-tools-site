@@ -27,21 +27,21 @@ const experimentTypeOptions: Array<{
     label: 'Лендинг / регистрация',
     usersLabel: 'Пользователи в месяц',
     conversionsLabel: 'Регистрации в месяц',
-    currentMetricLabel: 'Текущая конверсия в регистрацию'
+    currentMetricLabel: 'Текущая конверсия'
   },
   {
     value: 'presets',
     label: 'Пресеты / посадка в продукт',
     usersLabel: 'Пользователи в месяц',
     conversionsLabel: 'Посадки в продукт в месяц',
-    currentMetricLabel: 'Текущая конверсия в посадку в продукт'
+    currentMetricLabel: 'Текущая конверсия'
   },
   {
     value: 'purchase',
     label: 'Покупки',
     usersLabel: 'Пользователи в месяц',
     conversionsLabel: 'Покупки в месяц',
-    currentMetricLabel: 'Текущая конверсия в покупку'
+    currentMetricLabel: 'Текущая конверсия'
   }
 ];
 
@@ -154,7 +154,7 @@ export default function MdePage() {
           href="/"
           className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink"
         >
-          ← Back to toolkit
+          ← Назад к выбору инструментов
         </Link>
 
         <header className="mt-6 border-y border-border py-8">
@@ -251,13 +251,13 @@ export default function MdePage() {
               type="submit"
               className="inline-flex w-full items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 md:w-auto"
             >
-              Calculate
+              Рассчитать
             </button>
           </form>
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Results</h2>
+          <h2 className="text-lg font-semibold">Результаты</h2>
           {result ? (
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
@@ -273,11 +273,11 @@ export default function MdePage() {
                 <p className="mt-2 text-lg font-medium">{result.nPerGroup.toLocaleString('ru-RU')}</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">MDE (в п.п.)</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">MDE (п.п.)</p>
                 <p className="mt-2 text-lg font-medium">{(result.mde * 100).toFixed(2)} п.п.</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Relative uplift (%)</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-muted">Относительный рост (%)</p>
                 <p className="mt-2 text-lg font-medium">{(result.relativeUplift * 100).toFixed(2)}%</p>
               </div>
               <div className="rounded-xl border border-border bg-canvas px-4 py-3">
@@ -289,7 +289,7 @@ export default function MdePage() {
             </div>
           ) : (
             <p className="mt-3 text-sm text-muted">
-              Заполните поля и нажмите <strong>Calculate</strong> для расчёта.
+              Заполните поля и нажмите <strong>Рассчитать</strong> для расчёта.
             </p>
           )}
         </section>

@@ -256,20 +256,20 @@ export default function StatTestArpuPage() {
     <main className="min-h-screen bg-canvas text-ink">
       <div className="mx-auto w-full max-w-3xl px-6 py-12 md:px-10 md:py-16">
         <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
-          ← Back to toolkit
+          ← Назад к выбору инструментов
         </Link>
 
         <header className="mt-6 border-y border-border py-8">
           <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Статкритерий для ARPU</h1>
           <p className="mt-3 max-w-2xl text-base text-muted md:text-lg">
-            Сравнение ARPU в control и test с помощью Welch t-test по агрегированным данным.
+            Сравнение ARPU между группами control и test с помощью t-теста Уэлча по агрегированным данным.
           </p>
         </header>
 
         <section className="mt-8 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
           <p className="rounded-xl border border-border bg-canvas px-4 py-3 text-sm text-muted">
-            Используйте ARPU, рассчитанный как revenue / registrations. Стандартное отклонение тоже должно быть
-            рассчитано на уровне регистраций, то есть с нулевой выручкой для тех регистраций, которые не купили.
+            Используйте ARPU, рассчитанный как revenue / registrations. Стандартное отклонение также должно быть
+            рассчитано на уровне регистраций, включая нулевую выручку для тех регистраций, которые не совершили покупку.
           </p>
 
           <div className="mt-5 grid gap-4 md:grid-cols-2">
@@ -364,12 +364,12 @@ export default function StatTestArpuPage() {
             onClick={handleCalculate}
             className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 md:w-auto"
           >
-            Calculate
+            Рассчитать
           </button>
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Results</h2>
+          <h2 className="text-lg font-semibold">Результаты</h2>
 
           {error && (
             <p className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -428,7 +428,7 @@ export default function StatTestArpuPage() {
 
           {!error && !result && (
             <p className="mt-3 text-sm text-muted">
-              Заполните поля и нажмите <strong>Calculate</strong>, чтобы получить результат.
+              Заполните поля и нажмите <strong>«Рассчитать»</strong>, чтобы получить результат.
             </p>
           )}
         </section>

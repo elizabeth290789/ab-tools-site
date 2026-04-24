@@ -175,13 +175,13 @@ export default function StatTestPage() {
           href="/"
           className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink"
         >
-          ← Back to toolkit
+          ← Назад к выбору инструментов
         </Link>
 
         <header className="mt-6 border-y border-border py-8">
-          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Statistical Significance Test</h1>
+          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Проверка статистической значимости</h1>
           <p className="mt-3 max-w-2xl text-base text-muted md:text-lg">
-            Двухвыборочный z-тест для сравнения конверсий control и test с p-value и доверительным интервалом.
+            Двухвыборочный Z-тест для сравнения конверсий между группами control и test с расчётом p-value и доверительного интервала.
           </p>
         </header>
 
@@ -272,22 +272,22 @@ export default function StatTestPage() {
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Results</h2>
+          <h2 className="text-lg font-semibold">Результаты</h2>
           {result ? (
             <div className="mt-4 space-y-2 text-sm text-muted">
               <p>Конверсия control: <span className="font-semibold text-ink">{formatPercent(result.p1)}</span></p>
               <p>Конверсия test: <span className="font-semibold text-ink">{formatPercent(result.p2)}</span></p>
               <p>Разница (п.п.): <span className="font-semibold text-ink">{formatPp(result.diff)}</span></p>
               <p>
-                Relative uplift (%):{' '}
+                Относительный рост (%):{' '}
                 <span className="font-semibold text-ink">
                   {result.uplift === null ? 'N/A' : `${(result.uplift * 100).toFixed(2)}%`}
                 </span>
               </p>
-              <p>z-statistic: <span className="font-semibold text-ink">{result.z.toFixed(3)}</span></p>
+              <p>Z-статистика: <span className="font-semibold text-ink">{result.z.toFixed(3)}</span></p>
               <p>p-value: <span className="font-semibold text-ink">{result.pValue.toFixed(6)}</span></p>
               <p>
-                CI для разницы (п.п.):{' '}
+                ДИ для разницы (п.п.):{' '}
                 <span className="font-semibold text-ink">
                   [{(result.ciLow * 100).toFixed(2)}; {(result.ciHigh * 100).toFixed(2)}]
                 </span>

@@ -11,6 +11,18 @@ type ExperimentLabels = {
   eventsLabel: string;
 };
 
+type StatTestResult = {
+  p1: number;
+  p2: number;
+  diff: number;
+  uplift: number | null;
+  z: number;
+  pValue: number;
+  ciLow: number;
+  ciHigh: number;
+  isSignificant: boolean;
+};
+
 const experimentTypeOptions: Array<{ value: ExperimentType; label: string; labels: ExperimentLabels }> = [
   {
     value: 'landing',
@@ -105,13 +117,14 @@ export default function StatTestPage() {
   const [testConversions, setTestConversions] = useState('1650');
   const [alpha, setAlpha] = useState('0.05');
   const [hypothesisType, setHypothesisType] = useState<HypothesisType>('two-sided');
+  const [result, setResult] = useState<StatTestResult | null>(null);
 
   const selectedType = useMemo(
     () => experimentTypeOptions.find((option) => option.value === experimentType) ?? experimentTypeOptions[0],
     [experimentType]
   );
 
-  const result = useMemo(() => {
+  const calculateResult = (): StatTestResult | null => {
     const n1 = Number(controlUsers);
     const x1 = Number(controlConversions);
     const n2 = Number(testUsers);
@@ -166,7 +179,12 @@ export default function StatTestPage() {
       ciHigh,
       isSignificant: pValue < alphaValue
     };
-  }, [alpha, controlConversions, controlUsers, hypothesisType, testConversions, testUsers]);
+  };
+
+  const onCalculate = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setResult(calculateResult());
+  };
 
   return (
     <main className="min-h-screen bg-canvas text-ink">
@@ -186,93 +204,102 @@ export default function StatTestPage() {
         </header>
 
         <section className="mt-8 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <div className="grid gap-4 md:grid-cols-2">
-            <label className="flex flex-col gap-2 text-sm font-medium md:col-span-2">
-              <span>Тип эксперимента</span>
-              <select
-                value={experimentType}
-                onChange={(event) => setExperimentType(event.target.value as ExperimentType)}
-                className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
-              >
-                {experimentTypeOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+          <form onSubmit={onCalculate} className="space-y-5">
+            <div className="grid gap-4 md:grid-cols-2">
+              <label className="flex flex-col gap-2 text-sm font-medium md:col-span-2">
+                <span>Тип эксперимента</span>
+                <select
+                  value={experimentType}
+                  onChange={(event) => setExperimentType(event.target.value as ExperimentType)}
+                  className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
+                >
+                  {experimentTypeOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
 
-            <div className="flex flex-col">
-              <span className="mb-2 inline-flex w-fit rounded-[10px] bg-[#f3f3f3] px-[10px] py-1 text-xs font-medium text-muted">
-                Control
-              </span>
-              <div className="rounded-xl border border-border p-4">
-                <label className="flex flex-col gap-2 text-sm font-medium">
-                  <span>{selectedType.labels.usersLabel} в control</span>
-                  <input
-                    value={controlUsers}
-                    onChange={(event) => setControlUsers(event.target.value)}
-                    className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
-                  />
-                </label>
+              <div className="flex flex-col">
+                <span className="mb-2 inline-flex w-fit rounded-[10px] bg-[#f3f3f3] px-[10px] py-1 text-xs font-medium text-muted">
+                  Control
+                </span>
+                <div className="rounded-xl border border-border p-4">
+                  <label className="flex flex-col gap-2 text-sm font-medium">
+                    <span>{selectedType.labels.usersLabel} в control</span>
+                    <input
+                      value={controlUsers}
+                      onChange={(event) => setControlUsers(event.target.value)}
+                      className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
+                    />
+                  </label>
 
-                <label className="flex flex-col gap-2 text-sm font-medium">
-                  <span>{selectedType.labels.eventsLabel} в control</span>
-                  <input
-                    value={controlConversions}
-                    onChange={(event) => setControlConversions(event.target.value)}
-                    className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
-                  />
-                </label>
+                  <label className="flex flex-col gap-2 text-sm font-medium">
+                    <span>{selectedType.labels.eventsLabel} в control</span>
+                    <input
+                      value={controlConversions}
+                      onChange={(event) => setControlConversions(event.target.value)}
+                      className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
+                    />
+                  </label>
+                </div>
               </div>
+
+              <div className="flex flex-col">
+                <span className="mb-2 inline-flex w-fit rounded-[10px] bg-[#f3f3f3] px-[10px] py-1 text-xs font-medium text-muted">
+                  Test
+                </span>
+                <div className="rounded-xl border border-border p-4">
+                  <label className="flex flex-col gap-2 text-sm font-medium">
+                    <span>{selectedType.labels.usersLabel} в test</span>
+                    <input
+                      value={testUsers}
+                      onChange={(event) => setTestUsers(event.target.value)}
+                      className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
+                    />
+                  </label>
+
+                  <label className="flex flex-col gap-2 text-sm font-medium">
+                    <span>{selectedType.labels.eventsLabel} в test</span>
+                    <input
+                      value={testConversions}
+                      onChange={(event) => setTestConversions(event.target.value)}
+                      className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <label className="flex flex-col gap-2 text-sm font-medium">
+                <span>alpha</span>
+                <input
+                  value={alpha}
+                  onChange={(event) => setAlpha(event.target.value)}
+                  className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
+                />
+              </label>
+
+              <label className="flex flex-col gap-2 text-sm font-medium">
+                <span>Тип гипотезы</span>
+                <select
+                  value={hypothesisType}
+                  onChange={(event) => setHypothesisType(event.target.value as HypothesisType)}
+                  className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
+                >
+                  <option value="two-sided">two-sided</option>
+                  <option value="one-sided">one-sided (test &gt; control)</option>
+                </select>
+              </label>
             </div>
 
-            <div className="flex flex-col">
-              <span className="mb-2 inline-flex w-fit rounded-[10px] bg-[#f3f3f3] px-[10px] py-1 text-xs font-medium text-muted">
-                Test
-              </span>
-              <div className="rounded-xl border border-border p-4">
-                <label className="flex flex-col gap-2 text-sm font-medium">
-                  <span>{selectedType.labels.usersLabel} в test</span>
-                  <input
-                    value={testUsers}
-                    onChange={(event) => setTestUsers(event.target.value)}
-                    className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
-                  />
-                </label>
-
-                <label className="flex flex-col gap-2 text-sm font-medium">
-                  <span>{selectedType.labels.eventsLabel} в test</span>
-                  <input
-                    value={testConversions}
-                    onChange={(event) => setTestConversions(event.target.value)}
-                    className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
-                  />
-                </label>
-              </div>
-            </div>
-
-            <label className="flex flex-col gap-2 text-sm font-medium">
-              <span>alpha</span>
-              <input
-                value={alpha}
-                onChange={(event) => setAlpha(event.target.value)}
-                className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
-              />
-            </label>
-
-            <label className="flex flex-col gap-2 text-sm font-medium">
-              <span>Тип гипотезы</span>
-              <select
-                value={hypothesisType}
-                onChange={(event) => setHypothesisType(event.target.value as HypothesisType)}
-                className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
-              >
-                <option value="two-sided">two-sided</option>
-                <option value="one-sided">one-sided (test &gt; control)</option>
-              </select>
-            </label>
-          </div>
+            <button
+              type="submit"
+              className="inline-flex w-full items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 md:w-auto"
+            >
+              Рассчитать
+            </button>
+          </form>
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">

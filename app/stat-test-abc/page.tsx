@@ -220,7 +220,7 @@ export default function StatTestAbcPage() {
 
   return (
     <main className="min-h-screen bg-canvas text-ink">
-      <div className="mx-auto w-full max-w-3xl px-6 py-12 md:px-10 md:py-16">
+      <div className="mx-auto w-full max-w-6xl px-6 py-12 md:px-10 md:py-16">
         <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
           ← Назад к выбору инструментов
         </Link>
@@ -233,52 +233,58 @@ export default function StatTestAbcPage() {
         </header>
 
         <section className="mt-8 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-border p-4">
-              <h2 className="text-sm font-semibold">A (control)</h2>
-              <div className="mt-3 grid gap-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div className="space-y-2">
+              <h2 className="inline-flex rounded-full border border-border bg-canvas px-3 py-1 text-xs font-semibold">A (control)</h2>
+              <div className="rounded-xl border border-border p-4">
+                <div className="grid gap-3">
                 <label className="flex flex-col gap-2 text-sm font-medium">
                   <span>Пользователи в A</span>
-                  <input value={usersA} onChange={(event) => setUsersA(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  <input value={usersA} onChange={(event) => setUsersA(event.target.value)} className="w-full box-border rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
                 </label>
                 <label className="flex flex-col gap-2 text-sm font-medium">
                   <span>Конверсии в A</span>
-                  <input value={convA} onChange={(event) => setConvA(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  <input value={convA} onChange={(event) => setConvA(event.target.value)} className="w-full box-border rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
                 </label>
               </div>
             </div>
+            </div>
 
-            <div className="rounded-xl border border-border p-4">
-              <h2 className="text-sm font-semibold">B</h2>
-              <div className="mt-3 grid gap-3">
+            <div className="space-y-2">
+              <h2 className="inline-flex rounded-full border border-border bg-canvas px-3 py-1 text-xs font-semibold">B</h2>
+              <div className="rounded-xl border border-border p-4">
+                <div className="grid gap-3">
                 <label className="flex flex-col gap-2 text-sm font-medium">
                   <span>Пользователи в B</span>
-                  <input value={usersB} onChange={(event) => setUsersB(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  <input value={usersB} onChange={(event) => setUsersB(event.target.value)} className="w-full box-border rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
                 </label>
                 <label className="flex flex-col gap-2 text-sm font-medium">
                   <span>Конверсии в B</span>
-                  <input value={convB} onChange={(event) => setConvB(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  <input value={convB} onChange={(event) => setConvB(event.target.value)} className="w-full box-border rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
                 </label>
               </div>
             </div>
+            </div>
 
-            <div className="rounded-xl border border-border p-4 md:col-span-2">
-              <h2 className="text-sm font-semibold">C</h2>
-              <div className="mt-3 grid gap-3 md:grid-cols-2">
+            <div className="space-y-2">
+              <h2 className="inline-flex rounded-full border border-border bg-canvas px-3 py-1 text-xs font-semibold">C</h2>
+              <div className="rounded-xl border border-border p-4">
+                <div className="grid gap-3">
                 <label className="flex flex-col gap-2 text-sm font-medium">
                   <span>Пользователи в C</span>
-                  <input value={usersC} onChange={(event) => setUsersC(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  <input value={usersC} onChange={(event) => setUsersC(event.target.value)} className="w-full box-border rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
                 </label>
                 <label className="flex flex-col gap-2 text-sm font-medium">
                   <span>Конверсии в C</span>
-                  <input value={convC} onChange={(event) => setConvC(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  <input value={convC} onChange={(event) => setConvC(event.target.value)} className="w-full box-border rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
                 </label>
               </div>
+            </div>
             </div>
 
             <label className="flex flex-col gap-2 text-sm font-medium">
               <span>alpha</span>
-              <input value={alpha} onChange={(event) => setAlpha(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+              <input value={alpha} onChange={(event) => setAlpha(event.target.value)} className="w-full box-border rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
             </label>
 
             <label className="flex flex-col gap-2 text-sm font-medium">

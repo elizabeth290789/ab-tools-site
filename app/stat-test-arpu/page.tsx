@@ -261,9 +261,9 @@ export default function StatTestArpuPage() {
         </Link>
 
         <header className="mt-6 border-y border-border py-8">
-          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Статкритерий для ARPU</h1>
+          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Сравнение ARPU (t-тест)</h1>
           <p className="mt-3 max-w-2xl text-base text-muted md:text-lg">
-            Сравнение ARPU между группами control и test с помощью t-теста Уэлча по агрегированным данным.
+            Сравнение ARPU между группами control и test с помощью t-теста Уэлча.
           </p>
         </header>
 

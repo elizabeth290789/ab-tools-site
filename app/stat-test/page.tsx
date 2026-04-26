@@ -198,9 +198,9 @@ export default function StatTestPage() {
         </Link>
 
         <header className="mt-6 border-y border-border py-8">
-          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Проверка статистической значимости</h1>
+          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Сравнение конверсий (Z-тест)</h1>
           <p className="mt-3 max-w-2xl text-base text-muted md:text-lg">
-            Двухвыборочный Z-тест для сравнения конверсий между группами control и test с расчётом p-value и доверительного интервала.
+            Сравнение конверсий между группами control и test с помощью Z-теста.
           </p>
         </header>
 

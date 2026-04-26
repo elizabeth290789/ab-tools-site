@@ -27,7 +27,7 @@ const tools: Tool[] = [
     href: '/srm'
   },
   {
-    title: 'Проверка статистической значимости',
+    title: 'Сравнение конверсий (Z-тест)',
     description:
       'Поймите, действительно ли есть эффект — или это просто шум. Используется Z-тест для конверсии.',
     href: '/stat-test'
@@ -45,7 +45,7 @@ const tools: Tool[] = [
     href: '/stat-test-abc'
   },
   {
-    title: 'Статтест для ARPU',
+    title: 'Сравнение ARPU (t-тест)',
     description: 'Сравнивайте ARPU между группами с помощью t-теста Уэлча.',
     href: '/stat-test-arpu'
   }

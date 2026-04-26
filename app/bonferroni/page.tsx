@@ -2,6 +2,7 @@
 
 import { FormEvent, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { ResultCard, ResultCardsGrid, ResultsPanel } from '../components/results-panel';
 
 type MdeType = 'pp' | 'relative';
 
@@ -260,27 +261,26 @@ export default function BonferroniPage() {
           </form>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Результаты</h2>
+        <ResultsPanel>
           {hasCalculated ? (
             result === null ? (
               <p className="mt-3 text-sm text-muted">Пожалуйста, введите корректные числовые значения.</p>
             ) : (
-              <div className="mt-4 space-y-3 rounded-xl border border-border bg-canvas px-4 py-4 text-sm md:text-base">
-                <p><strong>Базовая конверсия:</strong> {formatPercent(result.baselineConversion)}</p>
-                <p><strong>Целевая конверсия:</strong> {formatPercent(result.targetConversion)}</p>
-                <p><strong>Скорректированный alpha:</strong> {result.correctedAlpha.toPrecision(6)}</p>
-                <p><strong>Размер выборки на группу:</strong> {formatInt(result.sampleSizePerGroup)}</p>
-                <p><strong>Размер выборки на сравнение:</strong> {formatInt(result.sampleSizePerComparison)}</p>
-                <p><strong>Общий размер выборки для 3 групп:</strong> {formatInt(result.totalSampleSizeForThreeGroups)}</p>
-              </div>
+              <ResultCardsGrid>
+                <ResultCard label="Базовая конверсия" value={formatPercent(result.baselineConversion)} />
+                <ResultCard label="Целевая конверсия" value={formatPercent(result.targetConversion)} />
+                <ResultCard label="Скорректированный alpha" value={result.correctedAlpha.toPrecision(6)} />
+                <ResultCard label="Размер выборки на группу" value={formatInt(result.sampleSizePerGroup)} />
+                <ResultCard label="Размер выборки на сравнение" value={formatInt(result.sampleSizePerComparison)} />
+                <ResultCard label="Общий размер выборки для 3 групп" value={formatInt(result.totalSampleSizeForThreeGroups)} />
+              </ResultCardsGrid>
             )
           ) : (
             <p className="mt-3 text-sm text-muted">
               Заполните поля и нажмите <strong>«Рассчитать»</strong>, чтобы получить расчёт.
             </p>
           )}
-        </section>
+        </ResultsPanel>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 text-sm text-muted shadow-card md:p-8 md:text-base">
           <p>Расчёт предполагает равные размеры групп и бинарную метрику (конверсию).</p>

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
+import { ResultCard, ResultCardsGrid, ResultsPanel } from '../components/results-panel';
 
 type Alternative = 'two-sided' | 'one-sided';
 type ExperimentType = 'landing' | 'presets' | 'purchase';
@@ -281,41 +282,22 @@ export default function SampleSizePage() {
           </button>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Результаты</h2>
+        <ResultsPanel>
           {!hasCalculated ? (
             <p className="mt-3 text-sm text-muted">Заполните поля и нажмите «Рассчитать».</p>
           ) : !result ? (
             <p className="mt-3 text-sm text-red-600">Please enter valid input values.</p>
           ) : (
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Конверсия control</p>
-                <p className="mt-2 text-lg font-medium">{formatPercent(result.p1 * 100)}</p>
-              </div>
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Конверсия test</p>
-                <p className="mt-2 text-lg font-medium">{formatPercent(result.p2 * 100)}</p>
-              </div>
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Относительный рост (%)</p>
-                <p className="mt-2 text-lg font-medium">{formatPercent(result.relativeUplift)}</p>
-              </div>
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Размер выборки на группу</p>
-                <p className="mt-2 text-lg font-medium">{formatInt(result.sampleSizePerGroup)}</p>
-              </div>
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Общий размер выборки</p>
-                <p className="mt-2 text-lg font-medium">{formatInt(result.totalSampleSize)}</p>
-              </div>
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Оценочная длительность теста (дни)</p>
-                <p className="mt-2 text-lg font-medium">{formatInt(result.estimatedDurationDays)}</p>
-              </div>
-            </div>
+            <ResultCardsGrid>
+              <ResultCard label="Конверсия control" value={formatPercent(result.p1 * 100)} />
+              <ResultCard label="Конверсия test" value={formatPercent(result.p2 * 100)} />
+              <ResultCard label="Относительный рост (%)" value={formatPercent(result.relativeUplift)} />
+              <ResultCard label="Размер выборки на группу" value={formatInt(result.sampleSizePerGroup)} />
+              <ResultCard label="Общий размер выборки" value={formatInt(result.totalSampleSize)} />
+              <ResultCard label="Оценочная длительность теста (дни)" value={formatInt(result.estimatedDurationDays)} />
+            </ResultCardsGrid>
           )}
-        </section>
+        </ResultsPanel>
       </div>
     </main>
   );

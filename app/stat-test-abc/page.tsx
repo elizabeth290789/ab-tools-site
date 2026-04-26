@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { ResultCard, ResultCardsGrid, ResultsPanel } from '../components/results-panel';
 
 type HypothesisType = 'two-sided' | 'one-sided';
 
@@ -191,30 +192,27 @@ export default function StatTestAbcPage() {
   };
 
   const renderPairResult = (title: string, pairResult: PairResult, leftLabel: string, rightLabel: string) => (
-    <section className="rounded-xl border border-border p-4">
+    <section className="rounded-xl border border-border bg-white p-4">
       <h3 className="text-base font-semibold">{title}</h3>
-      <div className="mt-3 space-y-2 text-sm text-muted">
-        <p>Конверсия {leftLabel}: <span className="font-semibold text-ink">{formatPercent(pairResult.p1)}</span></p>
-        <p>Конверсия {rightLabel}: <span className="font-semibold text-ink">{formatPercent(pairResult.p2)}</span></p>
-        <p>Разница (в п.п.): <span className="font-semibold text-ink">{formatPp(pairResult.diff)}</span></p>
-        <p>
-          Относительный рост (%):{' '}
-          <span className="font-semibold text-ink">
-            {pairResult.uplift === null ? 'N/A' : `${(pairResult.uplift * 100).toFixed(2)}%`}
-          </span>
-        </p>
-        <p>Z-статистика: <span className="font-semibold text-ink">{pairResult.z.toFixed(3)}</span></p>
-        <p>p-value: <span className="font-semibold text-ink">{pairResult.pValue.toFixed(6)}</span></p>
-        <p>
-          CI для разницы (п.п.):{' '}
-          <span className="font-semibold text-ink">
-            [{(pairResult.ciLow * 100).toFixed(2)}; {(pairResult.ciHigh * 100).toFixed(2)}]
-          </span>
-        </p>
-        <p className="pt-2 text-ink">
+      <ResultCardsGrid className="sm:grid-cols-2">
+        <ResultCard label={`Конверсия ${leftLabel}`} value={formatPercent(pairResult.p1)} />
+        <ResultCard label={`Конверсия ${rightLabel}`} value={formatPercent(pairResult.p2)} />
+        <ResultCard label="Разница (в п.п.)" value={formatPp(pairResult.diff)} />
+        <ResultCard
+          label="Относительный рост (%)"
+          value={pairResult.uplift === null ? 'N/A' : `${(pairResult.uplift * 100).toFixed(2)}%`}
+        />
+        <ResultCard label="Z-статистика" value={pairResult.z.toFixed(3)} />
+        <ResultCard label="p-value" value={pairResult.pValue.toFixed(6)} />
+        <ResultCard
+          className="sm:col-span-2"
+          label="CI для разницы (п.п.)"
+          value={`[${(pairResult.ciLow * 100).toFixed(2)}; ${(pairResult.ciHigh * 100).toFixed(2)}]`}
+        />
+      </ResultCardsGrid>
+      <p className="mt-4 rounded-xl border border-border bg-canvas px-4 py-3 text-sm text-ink">
           {pairResult.isSignificant ? 'Разница статистически значима' : 'Статистически значимой разницы нет'}
-        </p>
-      </div>
+      </p>
     </section>
   );
 
@@ -307,8 +305,7 @@ export default function StatTestAbcPage() {
           </div>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Результаты</h2>
+        <ResultsPanel>
           {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
 
           {result ? (
@@ -316,19 +313,19 @@ export default function StatTestAbcPage() {
               {renderPairResult('🔹 A vs B', result.avsB, 'A', 'B')}
               {renderPairResult('🔹 A vs C', result.avsC, 'A', 'C')}
 
-              <section className="rounded-xl border border-border p-4">
+              <section className="rounded-xl border border-border bg-white p-4">
                 <h3 className="text-base font-semibold">🔹 Общий блок</h3>
-                <div className="mt-3 space-y-2 text-sm text-muted">
-                  <p>alpha: <span className="font-semibold text-ink">{result.alpha}</span></p>
-                  <p>количество сравнений (k): <span className="font-semibold text-ink">{result.comparisons}</span></p>
-                  <p>corrected alpha: <span className="font-semibold text-ink">{result.correctedAlpha.toFixed(6)}</span></p>
-                </div>
+                <ResultCardsGrid>
+                  <ResultCard label="alpha" value={result.alpha} />
+                  <ResultCard label="количество сравнений (k)" value={result.comparisons} />
+                  <ResultCard className="sm:col-span-2" label="corrected alpha" value={result.correctedAlpha.toFixed(6)} />
+                </ResultCardsGrid>
               </section>
             </div>
           ) : (
             <p className="mt-3 text-sm text-muted">Заполните поля и нажмите «Рассчитать»</p>
           )}
-        </section>
+        </ResultsPanel>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 text-sm text-muted shadow-card md:p-8">
           Для A/B/C теста используются два сравнения: A-B и A-C. Уровень значимости корректируется по Бонферрони: alpha / k.

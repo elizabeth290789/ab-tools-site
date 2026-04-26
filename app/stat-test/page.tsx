@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
+import { ResultCard, ResultCardsGrid, ResultsPanel } from '../components/results-panel';
 
 type ExperimentType = 'landing' | 'presets' | 'purchase';
 type HypothesisType = 'two-sided' | 'one-sided';
@@ -302,37 +303,35 @@ export default function StatTestPage() {
           </form>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Результаты</h2>
+        <ResultsPanel>
           {result ? (
-            <div className="mt-4 space-y-2 text-sm text-muted">
-              <p>Конверсия control: <span className="font-semibold text-ink">{formatPercent(result.p1)}</span></p>
-              <p>Конверсия test: <span className="font-semibold text-ink">{formatPercent(result.p2)}</span></p>
-              <p>Разница (п.п.): <span className="font-semibold text-ink">{formatPp(result.diff)}</span></p>
-              <p>
-                Относительный рост (%):{' '}
-                <span className="font-semibold text-ink">
-                  {result.uplift === null ? 'N/A' : `${(result.uplift * 100).toFixed(2)}%`}
-                </span>
-              </p>
-              <p>Z-статистика: <span className="font-semibold text-ink">{result.z.toFixed(3)}</span></p>
-              <p>p-value: <span className="font-semibold text-ink">{result.pValue.toFixed(6)}</span></p>
-              <p>
-                ДИ для разницы (п.п.):{' '}
-                <span className="font-semibold text-ink">
-                  [{(result.ciLow * 100).toFixed(2)}; {(result.ciHigh * 100).toFixed(2)}]
-                </span>
-              </p>
-              <p className="pt-2 text-ink">
+            <>
+              <ResultCardsGrid>
+                <ResultCard label="Конверсия control" value={formatPercent(result.p1)} />
+                <ResultCard label="Конверсия test" value={formatPercent(result.p2)} />
+                <ResultCard label="Разница (п.п.)" value={formatPp(result.diff)} />
+                <ResultCard
+                  label="Относительный рост (%)"
+                  value={result.uplift === null ? 'N/A' : `${(result.uplift * 100).toFixed(2)}%`}
+                />
+                <ResultCard label="Z-статистика" value={result.z.toFixed(3)} />
+                <ResultCard label="p-value" value={result.pValue.toFixed(6)} />
+                <ResultCard
+                  className="sm:col-span-2"
+                  label="ДИ для разницы (п.п.)"
+                  value={`[${(result.ciLow * 100).toFixed(2)}; ${(result.ciHigh * 100).toFixed(2)}]`}
+                />
+              </ResultCardsGrid>
+              <p className="mt-4 rounded-xl border border-border bg-canvas px-4 py-3 text-sm text-ink">
                 {result.isSignificant
                   ? 'Разница статистически значима: test показывает более высокую конверсию, чем control.'
                   : 'Статистически значимых различий не обнаружено.'}
               </p>
-            </div>
+            </>
           ) : (
             <p className="mt-3 text-sm text-muted">Введите корректные значения, чтобы увидеть результат расчёта.</p>
           )}
-        </section>
+        </ResultsPanel>
       </div>
     </main>
   );

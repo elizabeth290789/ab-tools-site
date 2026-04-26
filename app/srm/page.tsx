@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
+import { ResultCard, ResultCardsGrid, ResultsPanel } from '../components/results-panel';
 
 type GroupInput = {
   id: number;
@@ -367,8 +368,7 @@ export default function SrmPage() {
           </form>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Результаты</h2>
+        <ResultsPanel>
 
           {!hasCalculated ? (
             <p className="mt-3 text-sm text-muted">Заполните поля и нажмите «Рассчитать», чтобы увидеть результат SRM-проверки.</p>
@@ -380,27 +380,12 @@ export default function SrmPage() {
 
           {result ? (
             <>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">Общий размер выборки</p>
-                  <p className="mt-2 text-lg font-medium">{formatNumber(result.sampleSize, 0)}</p>
-                </div>
-
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">Chi-square statistic</p>
-                  <p className="mt-2 text-lg font-medium">{formatNumber(result.chi2Stat, 6)}</p>
-                </div>
-
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">p-value</p>
-                  <p className="mt-2 text-lg font-medium">{formatNumber(result.pValue, 6)}</p>
-                </div>
-
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">Число степеней свободы</p>
-                  <p className="mt-2 text-lg font-medium">{formatNumber(result.degreesOfFreedom, 0)}</p>
-                </div>
-              </div>
+              <ResultCardsGrid>
+                <ResultCard label="Общий размер выборки" value={formatNumber(result.sampleSize, 0)} />
+                <ResultCard label="Chi-square statistic" value={formatNumber(result.chi2Stat, 6)} />
+                <ResultCard label="p-value" value={formatNumber(result.pValue, 6)} />
+                <ResultCard label="Число степеней свободы" value={formatNumber(result.degreesOfFreedom, 0)} />
+              </ResultCardsGrid>
 
               <div
                 className={`mt-5 rounded-xl border px-4 py-3 text-sm ${
@@ -440,7 +425,7 @@ export default function SrmPage() {
               </div>
             </>
           ) : null}
-        </section>
+        </ResultsPanel>
       </div>
     </main>
   );

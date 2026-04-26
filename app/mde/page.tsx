@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
+import { ResultCard, ResultCardsGrid, ResultsPanel } from '../components/results-panel';
 
 type ExperimentType = 'landing' | 'presets' | 'purchase';
 type HypothesisType = 'two-sided' | 'one-sided';
@@ -256,43 +257,25 @@ export default function MdePage() {
           </form>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Результаты</h2>
+        <ResultsPanel>
           {result ? (
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">{selectedType.currentMetricLabel}</p>
-                <p className="mt-2 text-lg font-medium">{formatPercent(result.baselineRate)}</p>
-              </div>
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">База для теста</p>
-                <p className="mt-2 text-lg font-medium">{result.totalBase.toLocaleString('ru-RU')}</p>
-              </div>
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Наблюдений на группу</p>
-                <p className="mt-2 text-lg font-medium">{result.nPerGroup.toLocaleString('ru-RU')}</p>
-              </div>
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">MDE (п.п.)</p>
-                <p className="mt-2 text-lg font-medium">{(result.mde * 100).toFixed(2)} п.п.</p>
-              </div>
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Относительный рост (%)</p>
-                <p className="mt-2 text-lg font-medium">{(result.relativeUplift * 100).toFixed(2)}%</p>
-              </div>
-              <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted">Детектируемый рост метрики</p>
-                <p className="mt-2 text-lg font-medium">
-                  {formatPercent(result.baselineRate)} → {formatPercent(result.detectableMetricGrowth)}
-                </p>
-              </div>
-            </div>
+            <ResultCardsGrid>
+              <ResultCard label={selectedType.currentMetricLabel} value={formatPercent(result.baselineRate)} />
+              <ResultCard label="База для теста" value={result.totalBase.toLocaleString('ru-RU')} />
+              <ResultCard label="Наблюдений на группу" value={result.nPerGroup.toLocaleString('ru-RU')} />
+              <ResultCard label="MDE (п.п.)" value={`${(result.mde * 100).toFixed(2)} п.п.`} />
+              <ResultCard label="Относительный рост (%)" value={`${(result.relativeUplift * 100).toFixed(2)}%`} />
+              <ResultCard
+                label="Детектируемый рост метрики"
+                value={`${formatPercent(result.baselineRate)} → ${formatPercent(result.detectableMetricGrowth)}`}
+              />
+            </ResultCardsGrid>
           ) : (
             <p className="mt-3 text-sm text-muted">
               Заполните поля и нажмите <strong>Рассчитать</strong> для расчёта.
             </p>
           )}
-        </section>
+        </ResultsPanel>
       </div>
     </main>
   );

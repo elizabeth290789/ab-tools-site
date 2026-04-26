@@ -81,6 +81,33 @@ function formatPercent(value: number, digits = 2) {
   return `${(value * 100).toFixed(digits)}%`;
 }
 
+function calculateSampleSizePerGroup(
+  baselineRatePercent: number,
+  mdePp: number,
+  alpha: number,
+  power: number,
+  hypothesisType: HypothesisType
+) {
+  const p1 = baselineRatePercent / 100;
+  const p2 = (baselineRatePercent + mdePp) / 100;
+  const delta = p2 - p1;
+
+  if (delta <= 0 || p2 <= 0 || p2 >= 1) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const alphaForZ = hypothesisType === 'two-sided' ? 1 - alpha / 2 : 1 - alpha;
+  const zAlpha = inverseNormalCdf(alphaForZ);
+  const zBeta = inverseNormalCdf(power);
+  const pooled = (p1 + p2) / 2;
+
+  const numerator =
+    zAlpha * Math.sqrt(2 * pooled * (1 - pooled)) +
+    zBeta * Math.sqrt(p1 * (1 - p1) + p2 * (1 - p2));
+
+  return Math.ceil((numerator * numerator) / (delta * delta));
+}
+
 export default function MdePage() {
   const [experimentType, setExperimentType] = useState<ExperimentType>('landing');
   const [usersPerMonth, setUsersPerMonth] = useState('30000');
@@ -131,10 +158,31 @@ export default function MdePage() {
       return;
     }
 
-    const zAlpha = inverseNormalCdf(1 - (hypothesisType === 'two-sided' ? alphaValue / 2 : alphaValue));
-    const zBeta = inverseNormalCdf(powerValue);
-    const mde = (zAlpha + zBeta) * Math.sqrt((2 * baselineRate * (1 - baselineRate)) / nPerGroup);
-    const relativeUplift = mde / baselineRate;
+    const baselinePercent = baselineRate * 100;
+    let low = 0.000001;
+    let high = 100 - baselinePercent;
+    const targetN = nPerGroup;
+
+    for (let i = 0; i < 60; i += 1) {
+      const mid = (low + high) / 2;
+      const requiredN = calculateSampleSizePerGroup(
+        baselinePercent,
+        mid,
+        alphaValue,
+        powerValue,
+        hypothesisType
+      );
+
+      if (requiredN > targetN) {
+        low = mid;
+      } else {
+        high = mid;
+      }
+    }
+
+    const mdePp = high;
+    const mde = mdePp / 100;
+    const relativeUplift = mdePp / baselinePercent;
     const detectableMetricGrowth = baselineRate + mde;
 
     setError(null);

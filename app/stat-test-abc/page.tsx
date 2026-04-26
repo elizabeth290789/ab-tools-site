@@ -112,8 +112,9 @@ function calculatePair(
     ? inverseNormalCdf(1 - correctedAlpha / 2)
     : inverseNormalCdf(1 - correctedAlpha);
 
-  const ciLow = diff - critical * sePooled;
-  const ciHigh = diff + critical * sePooled;
+  const seUnpooled = Math.sqrt((p1 * (1 - p1)) / n1 + (p2 * (1 - p2)) / n2);
+  const ciLow = diff - critical * seUnpooled;
+  const ciHigh = diff + critical * seUnpooled;
 
   return {
     p1,

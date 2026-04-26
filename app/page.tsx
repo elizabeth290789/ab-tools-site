@@ -61,16 +61,35 @@ export default function Home() {
           <p>BY MIKHAYLOVA ELIZAVETA</p>
         </header>
 
-        <section className="border-y border-border py-8 md:py-12">
-          <h1 className="max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">
-            Набор инструментов для A/B-тестирования
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg text-muted md:text-xl">
-            Считайте. Проверяйте. Запускайте.
-          </p>
+        <section className="relative border-y border-border py-8 md:py-12">
+          <svg
+            aria-hidden
+            viewBox="0 0 64 64"
+            className="pointer-events-none absolute right-[-100px] top-[-50px] z-0 h-[280px] w-[280px] opacity-[0.06] md:h-[520px] md:w-[520px]"
+          >
+            <rect x="2" y="2" width="60" height="60" rx="12" fill="#F5F5F5" stroke="#E5E5E5" />
+            <circle cx="20" cy="20" r="5" fill="#BDBDBD" />
+            <circle cx="32" cy="20" r="5" fill="#BDBDBD" />
+            <circle cx="44" cy="20" r="5" fill="#2B2B2B" />
+            <circle cx="20" cy="32" r="5" fill="#BDBDBD" />
+            <circle cx="32" cy="32" r="5" fill="#6FCF97" />
+            <circle cx="44" cy="32" r="5" fill="#2B2B2B" />
+            <circle cx="20" cy="44" r="5" fill="#2B2B2B" />
+            <circle cx="32" cy="44" r="5" fill="#2B2B2B" />
+            <circle cx="44" cy="44" r="5" fill="#BDBDBD" />
+          </svg>
+
+          <div className="relative z-[1]">
+            <h1 className="max-w-3xl text-4xl font-semibold leading-tight md:text-6xl">
+              Набор инструментов для A/B-тестирования
+            </h1>
+            <p className="mt-5 max-w-2xl text-lg text-muted md:text-xl">
+              Считайте. Проверяйте. Запускайте.
+            </p>
+          </div>
         </section>
 
-        <section className="mt-10 md:mt-14">
+        <section className="relative z-[1] mt-10 md:mt-14">
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {tools.map((tool, idx) => (
               <article

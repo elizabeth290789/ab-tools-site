@@ -300,7 +300,7 @@ export default function StatTestAbcPage() {
             <button
               type="button"
               onClick={handleCalculate}
-              className="inline-flex items-center gap-2 rounded-full border border-ink px-5 py-2.5 text-sm font-medium transition-colors hover:bg-ink hover:text-white"
+              className="inline-flex w-full items-center justify-center rounded-xl bg-ink px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 md:w-auto"
             >
               Рассчитать
             </button>
@@ -326,7 +326,7 @@ export default function StatTestAbcPage() {
               </section>
             </div>
           ) : (
-            <p className="mt-3 text-sm text-muted">Нажмите Calculate, чтобы выполнить расчёт.</p>
+            <p className="mt-3 text-sm text-muted">Заполните поля и нажмите «Рассчитать»</p>
           )}
         </section>
 

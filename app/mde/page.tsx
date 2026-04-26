@@ -207,7 +207,7 @@ export default function MdePage() {
         </Link>
 
         <header className="mt-6 border-y border-border py-8">
-          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">MDE Calculator</h1>
+          <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Калькулятор MDE</h1>
           <p className="mt-3 max-w-2xl text-base text-muted md:text-lg">
             Оцените минимальный эффект (MDE), который можно детектировать при текущем объёме трафика и длительности теста.
           </p>

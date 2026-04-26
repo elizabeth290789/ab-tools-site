@@ -233,46 +233,52 @@ export default function StatTestAbcPage() {
         </header>
 
         <section className="mt-8 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl border border-border p-4">
-              <h2 className="text-sm font-semibold">A (control)</h2>
-              <div className="mt-3 grid gap-3">
-                <label className="flex flex-col gap-2 text-sm font-medium">
-                  <span>Пользователи в A</span>
-                  <input value={usersA} onChange={(event) => setUsersA(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
-                </label>
-                <label className="flex flex-col gap-2 text-sm font-medium">
-                  <span>Конверсии в A</span>
-                  <input value={convA} onChange={(event) => setConvA(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
-                </label>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="min-w-0">
+              <p className="mb-2 inline-flex rounded-full border border-border bg-canvas px-3 py-1 text-xs font-medium text-muted">A (control)</p>
+              <div className="rounded-xl border border-border p-4">
+                <div className="grid gap-3">
+                  <label className="flex flex-col gap-2 text-sm font-medium">
+                    <span>Пользователи</span>
+                    <input value={usersA} onChange={(event) => setUsersA(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  </label>
+                  <label className="flex flex-col gap-2 text-sm font-medium">
+                    <span>Конверсии</span>
+                    <input value={convA} onChange={(event) => setConvA(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  </label>
+                </div>
               </div>
             </div>
 
-            <div className="rounded-xl border border-border p-4">
-              <h2 className="text-sm font-semibold">B</h2>
-              <div className="mt-3 grid gap-3">
-                <label className="flex flex-col gap-2 text-sm font-medium">
-                  <span>Пользователи в B</span>
-                  <input value={usersB} onChange={(event) => setUsersB(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
-                </label>
-                <label className="flex flex-col gap-2 text-sm font-medium">
-                  <span>Конверсии в B</span>
-                  <input value={convB} onChange={(event) => setConvB(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
-                </label>
+            <div className="min-w-0">
+              <p className="mb-2 inline-flex rounded-full border border-border bg-canvas px-3 py-1 text-xs font-medium text-muted">B</p>
+              <div className="rounded-xl border border-border p-4">
+                <div className="grid gap-3">
+                  <label className="flex flex-col gap-2 text-sm font-medium">
+                    <span>Пользователи</span>
+                    <input value={usersB} onChange={(event) => setUsersB(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  </label>
+                  <label className="flex flex-col gap-2 text-sm font-medium">
+                    <span>Конверсии</span>
+                    <input value={convB} onChange={(event) => setConvB(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  </label>
+                </div>
               </div>
             </div>
 
-            <div className="rounded-xl border border-border p-4 md:col-span-2">
-              <h2 className="text-sm font-semibold">C</h2>
-              <div className="mt-3 grid gap-3 md:grid-cols-2">
-                <label className="flex flex-col gap-2 text-sm font-medium">
-                  <span>Пользователи в C</span>
-                  <input value={usersC} onChange={(event) => setUsersC(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
-                </label>
-                <label className="flex flex-col gap-2 text-sm font-medium">
-                  <span>Конверсии в C</span>
-                  <input value={convC} onChange={(event) => setConvC(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
-                </label>
+            <div className="min-w-0">
+              <p className="mb-2 inline-flex rounded-full border border-border bg-canvas px-3 py-1 text-xs font-medium text-muted">C</p>
+              <div className="rounded-xl border border-border p-4">
+                <div className="grid gap-3">
+                  <label className="flex flex-col gap-2 text-sm font-medium">
+                    <span>Пользователи</span>
+                    <input value={usersC} onChange={(event) => setUsersC(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  </label>
+                  <label className="flex flex-col gap-2 text-sm font-medium">
+                    <span>Конверсии</span>
+                    <input value={convC} onChange={(event) => setConvC(event.target.value)} className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40" />
+                  </label>
+                </div>
               </div>
             </div>
 
@@ -290,11 +296,11 @@ export default function StatTestAbcPage() {
             </label>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 flex justify-start md:justify-center">
             <button
               type="button"
               onClick={handleCalculate}
-              className="inline-flex items-center gap-2 rounded-full border border-ink px-5 py-2.5 text-sm font-medium transition-colors hover:bg-ink hover:text-white"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-8 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
             >
               Рассчитать
             </button>
@@ -302,7 +308,7 @@ export default function StatTestAbcPage() {
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Results</h2>
+          <h2 className="text-lg font-semibold">Результаты</h2>
           {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
 
           {result ? (
@@ -320,11 +326,11 @@ export default function StatTestAbcPage() {
               </section>
             </div>
           ) : (
-            <p className="mt-3 text-sm text-muted">Нажмите Calculate, чтобы выполнить расчёт.</p>
+            <p className="mt-3 text-sm text-muted">Заполните поля и нажмите «Рассчитать»</p>
           )}
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-white p-6 text-sm text-muted shadow-card md:p-8">
+        <section className="mt-4 rounded-2xl border border-border/70 bg-canvas p-5 text-sm text-muted md:p-6">
           Для A/B/C теста используются два сравнения: A-B и A-C. Уровень значимости корректируется по Бонферрони: alpha / k.
         </section>
       </div>

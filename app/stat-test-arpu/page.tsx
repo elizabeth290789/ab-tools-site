@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { ResultCard, ResultCardsGrid, ResultsPanel } from '../components/results-panel';
 
 type HypothesisType = 'two-sided' | 'one-sided';
 
@@ -368,8 +369,7 @@ export default function StatTestArpuPage() {
           </button>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Результаты</h2>
+        <ResultsPanel>
 
           {error && (
             <p className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -379,38 +379,19 @@ export default function StatTestArpuPage() {
 
           {!error && result && (
             <>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">ARPU control</p>
-                  <p className="mt-2 text-lg font-medium">{formatNumber(result.meanA, 2)}</p>
-                </div>
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">ARPU test</p>
-                  <p className="mt-2 text-lg font-medium">{formatNumber(result.meanB, 2)}</p>
-                </div>
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">Разница (test - control)</p>
-                  <p className="mt-2 text-lg font-medium">{formatNumber(result.diff, 2)}</p>
-                </div>
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">Relative uplift (%)</p>
-                  <p className="mt-2 text-lg font-medium">
-                    {result.upliftPct === null ? 'N/A' : `${formatNumber(result.upliftPct, 2)}%`}
-                  </p>
-                </div>
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">t-statistic</p>
-                  <p className="mt-2 text-lg font-medium">{formatNumber(result.tStat, 4)}</p>
-                </div>
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">p-value</p>
-                  <p className="mt-2 text-lg font-medium">{formatNumber(result.pValue, 6)}</p>
-                </div>
-                <div className="rounded-xl border border-border bg-canvas px-4 py-3 sm:col-span-2">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted">Доверительный интервал для разницы ARPU</p>
-                  <p className="mt-2 text-lg font-medium">[{formatNumber(result.ciLow, 2)}; {formatNumber(result.ciHigh, 2)}]</p>
-                </div>
-              </div>
+              <ResultCardsGrid>
+                <ResultCard label="ARPU control" value={formatNumber(result.meanA, 2)} />
+                <ResultCard label="ARPU test" value={formatNumber(result.meanB, 2)} />
+                <ResultCard label="Разница (test - control)" value={formatNumber(result.diff, 2)} />
+                <ResultCard label="Relative uplift (%)" value={result.upliftPct === null ? 'N/A' : `${formatNumber(result.upliftPct, 2)}%`} />
+                <ResultCard label="t-statistic" value={formatNumber(result.tStat, 4)} />
+                <ResultCard label="p-value" value={formatNumber(result.pValue, 6)} />
+                <ResultCard
+                  className="sm:col-span-2"
+                  label="Доверительный интервал для разницы ARPU"
+                  value={`[${formatNumber(result.ciLow, 2)}; ${formatNumber(result.ciHigh, 2)}]`}
+                />
+              </ResultCardsGrid>
 
               <p
                 className={`mt-4 rounded-xl border px-4 py-3 text-sm ${
@@ -431,7 +412,7 @@ export default function StatTestArpuPage() {
               Заполните поля и нажмите <strong>«Рассчитать»</strong>, чтобы получить результат.
             </p>
           )}
-        </section>
+        </ResultsPanel>
       </div>
     </main>
   );

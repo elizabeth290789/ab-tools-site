@@ -3,7 +3,10 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'A/B Test Toolkit',
-  description: 'Tools for running better experiments.'
+  description: 'Tools for running better experiments.',
+  icons: {
+    icon: '/favicon.svg'
+  }
 };
 
 export default function RootLayout({

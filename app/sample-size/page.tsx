@@ -258,8 +258,8 @@ export default function SampleSizePage() {
                 onChange={(event) => setAlternative(event.target.value as Alternative)}
                 className="rounded-xl border border-border bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-ink/40"
               >
-                <option value="two-sided">Two-sided</option>
-                <option value="one-sided">One-sided</option>
+                <option value="two-sided">two-sided</option>
+                <option value="one-sided">one-sided (test &gt; control)</option>
               </select>
             </label>
 

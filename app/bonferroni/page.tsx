@@ -212,7 +212,7 @@ export default function BonferroniPage() {
               </label>
 
               <label className="flex flex-col gap-2 text-sm font-medium">
-                <span>Глобальный уровень значимости (alpha)</span>
+                <span>alpha global</span>
                 <input
                   type="number"
                   min="0"
@@ -225,7 +225,7 @@ export default function BonferroniPage() {
               </label>
 
               <label className="flex flex-col gap-2 text-sm font-medium">
-                <span>Мощность (power)</span>
+                <span>power</span>
                 <input
                   type="number"
                   min="0"

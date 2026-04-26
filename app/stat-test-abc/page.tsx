@@ -308,7 +308,7 @@ export default function StatTestAbcPage() {
         </section>
 
         <section className="mt-6 rounded-2xl border border-border bg-white p-6 shadow-card md:p-8">
-          <h2 className="text-lg font-semibold">Results</h2>
+          <h2 className="text-lg font-semibold">Результаты</h2>
           {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
 
           {result ? (

@@ -211,8 +211,14 @@ export default function StatTestAbcPage() {
           value={`[${(pairResult.ciLow * 100).toFixed(2)}; ${(pairResult.ciHigh * 100).toFixed(2)}]`}
         />
       </ResultCardsGrid>
-      <p className="mt-4 rounded-xl border border-border bg-canvas px-4 py-3 text-sm text-ink">
-          {pairResult.isSignificant ? 'Разница статистически значима' : 'Статистически значимой разницы нет'}
+      <p
+        className={`mt-4 rounded-xl border px-4 py-3 text-sm ${
+          pairResult.isSignificant
+            ? 'border-green-200 bg-green-50 text-green-700'
+            : 'border-border bg-canvas text-ink'
+        }`}
+      >
+        {pairResult.isSignificant ? 'Разница статистически значима' : 'Статистически значимой разницы нет'}
       </p>
     </section>
   );

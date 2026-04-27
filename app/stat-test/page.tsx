@@ -322,7 +322,13 @@ export default function StatTestPage() {
                   value={`[${(result.ciLow * 100).toFixed(2)}; ${(result.ciHigh * 100).toFixed(2)}]`}
                 />
               </ResultCardsGrid>
-              <p className="mt-4 rounded-xl border border-border bg-canvas px-4 py-3 text-sm text-ink">
+              <p
+                className={`mt-4 rounded-xl border px-4 py-3 text-sm ${
+                  result.isSignificant
+                    ? 'border-green-200 bg-green-50 text-green-700'
+                    : 'border-border bg-canvas text-ink'
+                }`}
+              >
                 {result.isSignificant
                   ? 'Разница статистически значима: test показывает более высокую конверсию, чем control.'
                   : 'Статистически значимых различий не обнаружено.'}

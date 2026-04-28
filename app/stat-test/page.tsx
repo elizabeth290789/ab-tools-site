@@ -226,9 +226,9 @@ export default function StatTestPage() {
                 <span className="mb-2 inline-flex w-fit rounded-[10px] bg-[#f3f3f3] px-[10px] py-1 text-xs font-medium text-muted">
                   Control
                 </span>
-                <div className="rounded-xl border border-border p-4">
-                  <label className="flex flex-col gap-2 text-sm font-medium">
-                    <span>{selectedType.labels.usersLabel} в control</span>
+                <div className="space-y-4 rounded-xl border border-border p-4">
+                  <label className="flex flex-col text-sm font-medium">
+                    <span className="mb-2">{selectedType.labels.usersLabel} в control</span>
                     <input
                       value={controlUsers}
                       onChange={(event) => setControlUsers(event.target.value)}
@@ -236,8 +236,8 @@ export default function StatTestPage() {
                     />
                   </label>
 
-                  <label className="flex flex-col gap-2 text-sm font-medium">
-                    <span>{selectedType.labels.eventsLabel} в control</span>
+                  <label className="flex flex-col text-sm font-medium">
+                    <span className="mb-2">{selectedType.labels.eventsLabel} в control</span>
                     <input
                       value={controlConversions}
                       onChange={(event) => setControlConversions(event.target.value)}
@@ -251,9 +251,9 @@ export default function StatTestPage() {
                 <span className="mb-2 inline-flex w-fit rounded-[10px] bg-[#f3f3f3] px-[10px] py-1 text-xs font-medium text-muted">
                   Test
                 </span>
-                <div className="rounded-xl border border-border p-4">
-                  <label className="flex flex-col gap-2 text-sm font-medium">
-                    <span>{selectedType.labels.usersLabel} в test</span>
+                <div className="space-y-4 rounded-xl border border-border p-4">
+                  <label className="flex flex-col text-sm font-medium">
+                    <span className="mb-2">{selectedType.labels.usersLabel} в test</span>
                     <input
                       value={testUsers}
                       onChange={(event) => setTestUsers(event.target.value)}
@@ -261,8 +261,8 @@ export default function StatTestPage() {
                     />
                   </label>
 
-                  <label className="flex flex-col gap-2 text-sm font-medium">
-                    <span>{selectedType.labels.eventsLabel} в test</span>
+                  <label className="flex flex-col text-sm font-medium">
+                    <span className="mb-2">{selectedType.labels.eventsLabel} в test</span>
                     <input
                       value={testConversions}
                       onChange={(event) => setTestConversions(event.target.value)}

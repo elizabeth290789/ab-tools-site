@@ -190,7 +190,7 @@ export default function Home() {
           <svg
             aria-hidden
             viewBox="0 0 64 64"
-            className="pointer-events-none absolute right-[-100px] top-[-50px] z-0 h-[280px] w-[280px] opacity-[0.06] md:h-[520px] md:w-[520px]"
+            className="pointer-events-none absolute right-[-120px] top-[-80px] z-0 h-[380px] w-[380px] opacity-[0.05] md:h-[620px] md:w-[620px]"
           >
             <rect x="2" y="2" width="60" height="60" rx="12" fill="#F5F5F5" stroke="#E5E5E5" />
             <circle cx="20" cy="20" r="5" fill="#BDBDBD" />
